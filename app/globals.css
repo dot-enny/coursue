@@ -97,7 +97,7 @@
   /* Orange */
 
   /* Sidebar matches Background in Light Mode */
-  --sidebar: oklch(0.969 0.003 264.5);
+  --sidebar: oklch(100.00% 0.000 0);
   --sidebar-foreground: oklch(0.284 0.038 261);
   --sidebar-primary: oklch(0.563 0.214 283);
   --sidebar-primary-foreground: oklch(1 0 0);

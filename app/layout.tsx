@@ -40,7 +40,7 @@ export default function RootLayout({
           <SidebarProvider>
             <div className="flex min-h-screen w-full">
               <AppSidebar />
-              <main className="flex w-full flex-col overflow-x-hidden">
+              <main className="flex w-full flex-col overflow-x-hidden bg-background">
                 <TopHeader />
                 <div className="flex-1 p-6 pt-0">{children}</div>
               </main>

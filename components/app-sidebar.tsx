@@ -1,167 +1,189 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import * as React from "react";
 import {
-    LayoutDashboard,
-    Inbox,
-    BookOpen,
-    CalendarCheck,
-    Users,
-    Settings,
-    LogOut,
-    Sparkles,
-} from "lucide-react"
+  LayoutDashboard,
+  Inbox,
+  BookOpen,
+  CalendarCheck,
+  Users,
+  Settings,
+  LogOut,
+  Sparkles,
+} from "lucide-react";
 
 import {
-    Sidebar,
-    SidebarContent,
-    SidebarGroup,
-    SidebarGroupContent,
-    SidebarGroupLabel,
-    SidebarHeader,
-    SidebarMenu,
-    SidebarMenuButton,
-    SidebarMenuItem,
-    SidebarTrigger,
-    SidebarFooter,
-} from "@/components/ui/sidebar"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+  Sidebar,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarTrigger,
+  SidebarFooter,
+} from "@/components/ui/sidebar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 // Mock data for friends
 const friends = [
-    {
-        name: "Bagas Mahpie",
-        role: "Friend",
-        avatar: "https://sdk.bitmoji.com/render/panel/10211854-99378385-a7b3-4610-8593-68f773636cc6-d06969c3-1629-4448-9da4-76679269558c-v1.png?transparent=1&palette=1",
-        fallback: "BM",
-    },
-    {
-        name: "Sir Dandy",
-        role: "Old Friend",
-        avatar: "https://sdk.bitmoji.com/render/panel/20054366-99378385-ce12-401d-8472-3511116f316d-3f11340b-4663-4481-9875-5da23c3b06a4-v1.png?transparent=1&palette=1",
-        fallback: "SD",
-    },
-    {
-        name: "Jhon Tosan",
-        role: "Friend",
-        avatar: "https://sdk.bitmoji.com/render/panel/76973322-99378385-618d-4cb0-8113-1678583483b8-65147986-ebbf-4c75-b3e3-774e40243be4-v1.png?transparent=1&palette=1",
-        fallback: "JT",
-    },
-]
+  {
+    name: "Bagas Mahpie",
+    role: "Friend",
+    avatar:
+      "/images/avatars/friend-1.png",
+    fallback: "BM",
+  },
+  {
+    name: "Sir Dandy",
+    role: "Old Friend",
+    avatar:
+      "/images/avatars/friend-2.png",
+    fallback: "SD",
+  },
+  {
+    name: "Jhon Tosan",
+    role: "Friend",
+    avatar:
+      "/images/avatars/friend-3.png",
+    fallback: "JT",
+  },
+];
+
+type Friend = (typeof friends)[0];
+
+// Sidebar sections config (data-driven)
+const sidebarSections = [
+  {
+    key: "overview",
+    label: "Overview",
+    itemSpacing: "space-y-1",
+    items: [
+      {
+        key: "dashboard",
+        label: "Dashboard",
+        icon: LayoutDashboard,
+        isActive: true,
+      },
+      { key: "inbox", label: "Inbox", icon: Inbox },
+      { key: "lesson", label: "Lesson", icon: BookOpen },
+      { key: "task", label: "Task", icon: CalendarCheck },
+      { key: "group", label: "Group", icon: Users },
+    ],
+  },
+  {
+    key: "friends",
+    label: "Friends",
+    itemSpacing: "space-y-4",
+    variant: "friends",
+    items: friends,
+  },
+  {
+    key: "settings",
+    label: "Settings",
+    itemSpacing: "space-y-1",
+    items: [
+      { key: "setting", label: "Setting", icon: Settings },
+      { key: "logout", label: "Logout", icon: LogOut, destructive: true },
+    ],
+  },
+];
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-    return (
-        <Sidebar collapsible="icon" className="border-r-0 bg-sidebar" {...props}>
-            <SidebarHeader className="py-6 px-6">
-                <div className="flex items-center gap-2 font-bold text-xl text-foreground">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground">
-                        <Sparkles className="h-4 w-4 fill-current" />
-                    </div>
-                    Coursue
-                </div>
-            </SidebarHeader>
-            <SidebarContent className="px-4">
-                <SidebarGroup>
-                    <SidebarGroupLabel className="uppercase text-[10px] font-bold text-muted-foreground/70 mb-2 px-2 tracking-wider">
-                        Overview
-                    </SidebarGroupLabel>
-                    <SidebarGroupContent>
-                        <SidebarMenu className="space-y-1">
-                            <SidebarMenuItem>
-                                <SidebarMenuButton isActive className="font-bold text-foreground hover:bg-transparent hover:text-foreground data-[active=true]:bg-transparent data-[active=true]:text-foreground [&>svg]:!fill-primary [&>svg]:!text-primary">
-                                    <LayoutDashboard />
-                                    <span>Dashboard</span>
-                                </SidebarMenuButton>
-                            </SidebarMenuItem>
-                            <SidebarMenuItem>
-                                <SidebarMenuButton className="font-bold text-foreground/70 hover:bg-transparent hover:text-foreground [&>svg]:text-muted-foreground hover:[&>svg]:text-primary hover:[&>svg]:fill-primary">
-                                    <Inbox />
-                                    <span>Inbox</span>
-                                </SidebarMenuButton>
-                            </SidebarMenuItem>
-                            <SidebarMenuItem>
-                                <SidebarMenuButton className="font-bold text-foreground/70 hover:bg-transparent hover:text-foreground [&>svg]:text-muted-foreground hover:[&>svg]:text-primary hover:[&>svg]:fill-primary">
-                                    <BookOpen />
-                                    <span>Lesson</span>
-                                </SidebarMenuButton>
-                            </SidebarMenuItem>
-                            <SidebarMenuItem>
-                                <SidebarMenuButton className="font-bold text-foreground/70 hover:bg-transparent hover:text-foreground [&>svg]:text-muted-foreground hover:[&>svg]:text-primary hover:[&>svg]:fill-primary">
-                                    <CalendarCheck />
-                                    <span>Task</span>
-                                </SidebarMenuButton>
-                            </SidebarMenuItem>
-                            <SidebarMenuItem>
-                                <SidebarMenuButton className="font-bold text-foreground/70 hover:bg-transparent hover:text-foreground [&>svg]:text-muted-foreground hover:[&>svg]:text-primary hover:[&>svg]:fill-primary">
-                                    <Users />
-                                    <span>Group</span>
-                                </SidebarMenuButton>
-                            </SidebarMenuItem>
-                        </SidebarMenu>
-                    </SidebarGroupContent>
-                </SidebarGroup>
+  return (
+    <Sidebar
+      collapsible="icon"
+      className="border-r-transparent bg-sidebar w-56"
+      {...props}
+    >
+      <SidebarHeader className="py-6 px-6">
+        <div className="flex items-center gap-2 font-bold text-xl text-foreground">
+          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground">
+            <Sparkles className="h-4 w-4 fill-current" />
+          </div>
+          Coursue
+        </div>
+      </SidebarHeader>
+      <SidebarContent className="px-4">
+        {sidebarSections.map((section, idx) => {
+          const groupClassName =
+            section.key === "settings"
+              ? "mt-auto pb-6"
+              : idx > 0
+                ? "mt-4"
+                : undefined;
 
-                <SidebarGroup className="mt-4">
-                    <SidebarGroupLabel className="uppercase text-[10px] font-bold text-muted-foreground/70 mb-2 px-2 tracking-wider">
-                        Friends
-                    </SidebarGroupLabel>
-                    <SidebarGroupContent>
-                        <SidebarMenu className="space-y-4">
-                            {friends.map((friend) => (
-                                <SidebarMenuItem key={friend.name}>
-                                    <div className="flex items-center gap-3 px-2">
-                                        <Avatar className="h-9 w-9 bg-muted">
-                                            <AvatarImage src={friend.avatar} alt={friend.name} />
-                                            <AvatarFallback>{friend.fallback}</AvatarFallback>
-                                        </Avatar>
-                                        <div className="flex flex-col group-data-[collapsible=icon]:hidden">
-                                            <span className="text-sm font-bold text-foreground">
-                                                {friend.name}
-                                            </span>
-                                            <span className="text-xs font-medium text-muted-foreground">
-                                                {friend.role}
-                                            </span>
-                                        </div>
-                                    </div>
-                                </SidebarMenuItem>
-                            ))}
-                        </SidebarMenu>
-                    </SidebarGroupContent>
-                </SidebarGroup>
+          return (
+            <SidebarGroup key={section.key} className={groupClassName}>
+              <SidebarGroupLabel className="uppercase text-[10px] font-bold text-muted-foreground/70 mb-1 px-2 tracking-wider">
+                {section.label}
+              </SidebarGroupLabel>
+              <SidebarGroupContent>
+                <SidebarMenu className={section.itemSpacing}>
+                  {section.variant === "friends"
+                    ? section.items.map((friend: Friend) => (
+                      <SidebarMenuItem
+                        key={friend.name}
+                        className="cursor-pointer"
+                      >
+                        <div className="flex items-center gap-3 px-2">
+                          <Avatar className="h-9 w-9 bg-muted">
+                            <AvatarImage
+                              src={friend.avatar}
+                              alt={friend.name}
+                            />
+                            <AvatarFallback>{friend.fallback}</AvatarFallback>
+                          </Avatar>
+                          <div className="flex flex-col group-data-[collapsible=icon]:hidden">
+                            <span className="text-sm font-bold text-foreground">
+                              {friend.name}
+                            </span>
+                            <span className="text-xs font-medium text-muted-foreground">
+                              {friend.role}
+                            </span>
+                          </div>
+                        </div>
+                      </SidebarMenuItem>
+                    ))
+                    : section.items.map((item: any) => {
+                      const Icon = item.icon;
+                      const baseBtnClasses =
+                        "font-bold hover:bg-transparent text-foreground [&>svg]:text-muted-foreground hover:[&>svg]:text-primary hover:[&>svg]:fill-primary cursor-pointer";
+                      const activeBtnClasses =
+                        "font-extrabold hover:bg-transparent text-foreground data-[active=true]:bg-transparent [&>svg]:fill-primary! [&>svg]:text-primary! cursor-pointer";
+                      const destructiveBtnClasses =
+                        "font-bold text-destructive hover:bg-transparent hover:text-destructive hover:opacity-80 cursor-pointer";
 
-                <SidebarGroup className="mt-auto pb-6">
-                    <SidebarGroupLabel className="uppercase text-[10px] font-bold text-muted-foreground/70 mb-2 px-2 tracking-wider">
-                        Settings
-                    </SidebarGroupLabel>
-                    <SidebarGroupContent>
-                        <SidebarMenu className="space-y-1">
-                            <SidebarMenuItem>
-                                <SidebarMenuButton className="font-bold text-foreground/70 hover:bg-transparent hover:text-foreground [&>svg]:text-muted-foreground hover:[&>svg]:text-primary">
-                                    <Settings />
-                                    <span>Setting</span>
-                                </SidebarMenuButton>
-                            </SidebarMenuItem>
-                            <SidebarMenuItem>
-                                <SidebarMenuButton className="font-bold text-destructive hover:bg-transparent hover:text-destructive hover:opacity-80">
-                                    <LogOut />
-                                    <span>Logout</span>
-                                </SidebarMenuButton>
-                            </SidebarMenuItem>
-                        </SidebarMenu>
-                    </SidebarGroupContent>
-                </SidebarGroup>
-            </SidebarContent>
+                      const btnClass = item.destructive
+                        ? destructiveBtnClasses
+                        : item.isActive
+                          ? activeBtnClasses
+                          : baseBtnClasses;
 
-            <SidebarFooter className="p-4 md:hidden">
-                {/* Trigger for mobile is handled by top header, this is for consistency if needed */}
-            </SidebarFooter>
-            {/* Use SidebarTrigger for desktop collapse button if Rail is not enough, but user asked for "visible by default". 
-                 The standard SidebarRail is the hover area. To make a concrete button, we can use SidebarTrigger inside the sidebar or a custom one.
-                 Let's try putting a SidebarTrigger at the bottom of the sidebar for clear visibility.
-             */}
-            <div className="hidden md:flex justify-end p-4">
-                <SidebarTrigger className="text-muted-foreground hover:text-foreground" />
-            </div>
-        </Sidebar>
-    )
+                      return (
+                        <SidebarMenuItem key={item.key}>
+                          <SidebarMenuButton
+                            {...(item.isActive ? { isActive: true } : {})}
+                            className={btnClass}
+                          >
+                            {Icon ? <Icon /> : null}
+                            <span>{item.label}</span>
+                          </SidebarMenuButton>
+                        </SidebarMenuItem>
+                      );
+                    })}
+                </SidebarMenu>
+              </SidebarGroupContent>
+            </SidebarGroup>
+          );
+        })}
+      </SidebarContent>
+
+      <div className="hidden max-sm:hidden md:flex justify-end px-4 pb-4 lg:hidden">
+        <SidebarTrigger className="text-muted-foreground hover:text-foreground" />
+      </div>
+    </Sidebar>
+  );
 }

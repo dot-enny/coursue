@@ -18,13 +18,10 @@ export default function Home() {
       </div>
 
       {/* Right Sidebar Panel Column */}
-      <div className="flex w-full flex-col gap-6 xl:w-80 shrink-0">
-        {/* <div className="flex flex-col gap-8 rounded-3xl border border-border bg-card p-6 shadow-xs"> */}
+      <div className="flex w-full h-fit flex-col gap-6 xl:w-80 shrink-0 bg-sidebar px-4 py-3 rounded-2xl">
         <StatisticPanel />
-        {/* Dashed Separator could be added here if needed, but spacing might be enough */}
         <ActivityChart />
         <YourMentor />
-        {/* </div> */}
       </div>
     </div>
   );

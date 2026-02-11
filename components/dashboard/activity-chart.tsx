@@ -21,13 +21,7 @@ const data = [
 
 export function ActivityChart() {
     return (
-        <div className="">
-            <div className="mb-6 flex items-center justify-between">
-                <h2 className="text-xl font-bold text-foreground">Activity</h2>
-                <div className="flex gap-2">
-                    {/* Week/Month toggle could go here */}
-                </div>
-            </div>
+        <div>
 
             <div className="h-[200px] w-full">
                 <ChartContainer
