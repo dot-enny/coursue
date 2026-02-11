@@ -1,51 +1,53 @@
 "use client"
 
-import * as React from "react"
 import { ChevronLeft, ChevronRight, Heart, MoreHorizontal } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
+import Image from "next/image"
 
 const courses = [
     {
-        title: "Mastering Front-End with ReactJS",
+        title: "Beginner's Guide to Becoming a Professional Front-End Developer",
         category: "FRONT END",
         categoryColor: "bg-blue-100 text-blue-600 dark:bg-blue-900/40 dark:text-blue-400",
-        image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=2070&auto=format&fit=crop",
+        image: "/images/courses/course-1.jpg",
         mentor: {
             name: "Jean Caros",
             role: "Mentor",
-            avatar: "/images/mentor-1.jpg",
+            avatar: "/images/avatars/mentor-1.png",
             fallback: "JC",
         },
         isFavorite: false,
+        progress: 65,
     },
     {
-        title: "Principles of UI/UX Design 2023",
+        title: "Optimizing User Experience with the Best UI/UX Design",
         category: "UI/UX DESIGN",
         categoryColor: "bg-orange-100 text-orange-600 dark:bg-orange-900/40 dark:text-orange-400",
-        image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1974&auto=format&fit=crop",
+        image: "/images/courses/course-2.jpg",
         mentor: {
             name: "Kierra Gouse",
             role: "Mentor",
-            avatar: "/images/mentor-2.jpg",
+            avatar: "/images/avatars/mentor-2.png",
             fallback: "KG",
         },
         isFavorite: true,
+        progress: 45,
     },
     {
-        title: "Branding Design for Beginners",
+        title: "Reviving and Refreshing your Company Image",
         category: "BRANDING",
         categoryColor: "bg-purple-100 text-purple-600 dark:bg-purple-900/40 dark:text-purple-400",
-        image: "https://images.unsplash.com/photo-1626785774573-4b7993125641?q=80&w=2070&auto=format&fit=crop",
+        image: "/images/courses/course-3.jpg",
         mentor: {
             name: "Livia Bator",
             role: "Mentor",
-            avatar: "/images/mentor-3.jpg",
+            avatar: "/images/avatars/mentor-3.png",
             fallback: "LB",
         },
         isFavorite: false,
+        progress: 25,
     },
 ]
 
@@ -64,23 +66,21 @@ export function ContinueWatching() {
                 </div>
             </div>
 
-            <div className="relative w-full min-w-0 max-w-full">
-                <div className="flex w-full gap-6 overflow-x-auto pb-4 snap-x hide-scrollbar">
+            <div className="relative w-full min-w-0 max-w-full rounded-3xl bg-sidebar pt-5 pb-1">
+                <div className="flex w-full gap-6 overflow-x-auto pb-4 snap-x hide-scrollbar px-5">
                     {courses.map((course) => (
-                        <Card key={course.title} className="group min-w-[280px] sm:min-w-[320px] flex-1 overflow-hidden rounded-2xl border-none shadow-sm transition-all hover:shadow-md snap-center bg-card shrink-0">
-                            <div className="relative aspect-video w-full bg-muted">
+                        <div key={course.title} className="group min-w-[280px] sm:min-w-[320px] flex-1 snap-center shrink-0">
+                            {/* Image Container */}
+                            <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-muted mb-4">
                                 {course.image && (
-                                    <img
+                                    <Image
                                         src={course.image}
                                         alt={course.title}
+                                        width={500}
+                                        height={500}
                                         className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                                     />
                                 )}
-                                <div className="absolute top-3 left-3 z-10">
-                                    <Badge variant="secondary" className={`${course.categoryColor} border-none font-semibold shadow-xs`}>
-                                        {course.category}
-                                    </Badge>
-                                </div>
                                 <Button
                                     variant="ghost"
                                     size="icon"
@@ -91,11 +91,28 @@ export function ContinueWatching() {
                                 {/* Overlay gradient */}
                                 <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent pointer-events-none" />
                             </div>
-                            <CardContent className="p-4">
-                                <h3 className="mb-4 text-base font-bold leading-snug line-clamp-2">
+
+                            {/* Content */}
+                            <div className="space-y-3">
+                                <Badge variant="secondary" className={`${course.categoryColor} border-none font-semibold shadow-xs hover:bg-opacity-80`}>
+                                    {course.category}
+                                </Badge>
+
+                                {/* Title */}
+                                <h3 className="text-base font-bold leading-snug line-clamp-2 text-foreground text-pretty">
                                     {course.title}
                                 </h3>
-                                <div className="flex items-center justify-between">
+
+                                {/* Progress Bar */}
+                                <div className="h-1.5 w-full rounded-full bg-secondary/50">
+                                    <div
+                                        className="h-full rounded-full bg-primary"
+                                        style={{ width: `${course.progress}%` }}
+                                    />
+                                </div>
+
+                                {/* Mentor */}
+                                <div className="flex items-center justify-between pt-1">
                                     <div className="flex items-center gap-2">
                                         <Avatar className="h-8 w-8 border border-border">
                                             <AvatarImage src={course.mentor.avatar} />
@@ -103,15 +120,12 @@ export function ContinueWatching() {
                                         </Avatar>
                                         <div className="flex flex-col">
                                             <span className="text-xs font-bold text-foreground">{course.mentor.name}</span>
-                                            <span className="text-[10px] bg-clip-text text-muted-foreground">{course.mentor.role}</span>
+                                            <span className="text-[10px] text-muted-foreground">{course.mentor.role}</span>
                                         </div>
                                     </div>
-                                    <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full text-muted-foreground hover:bg-muted hover:text-foreground">
-                                        <MoreHorizontal className="h-4 w-4" />
-                                    </Button>
                                 </div>
-                            </CardContent>
-                        </Card>
+                            </div>
+                        </div>
                     ))}
                 </div>
             </div>
