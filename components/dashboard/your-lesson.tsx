@@ -42,45 +42,36 @@ export function YourLesson() {
                 </a>
             </div>
 
-            <div className="rounded-3xl bg-card shadow-xs">
-                <DesktopView />
-                <MobileView />
+            <div className="rounded-3xl bg-card shadow-xs overflow-hidden">
+                <TableView />
             </div>
         </div>
     )
 }
 
-const DesktopView = () => {
+const TableView = () => {
     return (
-        <div className="hidden md:block">
-            {/* table header */}
-            <div className="grid grid-cols-12 gap-4 px-6 py-3 border-b border-border/60 text-xs font-semibold text-muted-foreground uppercase tracking-wider text-center">
-                <div className="col-span-3">Mentor</div>
-                <div className="col-span-3">Type</div>
-                <div className="col-span-4">Desc</div>
-                <div className="col-span-1 ml-10">Action</div>
-            </div>
-            {/* table items */}
-            <div>
-                {lessons.map((lesson) => (
-                    <LessonItemDesktop key={lesson.id} lesson={lesson} />
-                ))}
+        <div className="overflow-x-auto">
+            <div className="min-w-[600px]">
+                {/* table header */}
+                <div className="grid grid-cols-12 gap-4 px-6 py-3 border-b border-border/60 text-xs font-semibold text-muted-foreground uppercase tracking-wider text-center">
+                    <div className="col-span-3">Mentor</div>
+                    <div className="col-span-3">Type</div>
+                    <div className="col-span-4">Desc</div>
+                    <div className="col-span-1 ml-10">Action</div>
+                </div>
+                {/* table items */}
+                <div>
+                    {lessons.map((lesson) => (
+                        <TableRow key={lesson.id} lesson={lesson} />
+                    ))}
+                </div>
             </div>
         </div>
     )
 };
 
-const MobileView = () => {
-    return (
-        <div className="md:hidden space-y-4 px-6">
-            {lessons.map((lesson) => (
-                <LessonItemMobile key={lesson.id} lesson={lesson} />
-            ))}
-        </div>
-    )
-};
-
-const LessonItemDesktop = ({ lesson }: { lesson: typeof lessons[0] }) => {
+const TableRow = ({ lesson }: { lesson: typeof lessons[0] }) => {
     return (
         <div key={lesson.id} className="grid grid-cols-12 gap-4 items-center px-6 py-3 border-b border-border/60 last:border-0 hover:bg-muted/50 transition-colors">
             {/* Mentor */}
@@ -113,40 +104,6 @@ const LessonItemDesktop = ({ lesson }: { lesson: typeof lessons[0] }) => {
             <div className="col-span-1 flex justify-center">
                 <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full border border-border hover:bg-muted text-primary">
                     <ArrowUpRight className="h-4 w-4" />
-                </Button>
-            </div>
-        </div>
-    )
-}
-
-const LessonItemMobile = ({ lesson }: { lesson: typeof lessons[0] }) => {
-    return (
-        <div className="rounded-2xl border border-border bg-background p-4 shadow-sm flex flex-col gap-4">
-            <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                    <Avatar className="h-10 w-10 border border-border">
-                        <AvatarImage src={lesson.mentor.avatar} />
-                        <AvatarFallback className="bg-orange-100 text-orange-600 font-bold text-xs">
-                            {lesson.mentor.fallback}
-                        </AvatarFallback>
-                    </Avatar>
-                    <div className="flex flex-col">
-                        <span className="text-sm font-bold text-foreground">{lesson.mentor.name}</span>
-                        <span className="text-xs text-muted-foreground">{lesson.date}</span>
-                    </div>
-                </div>
-                <Badge variant="secondary" className={`${lesson.categoryColor} border-none font-semibold shadow-xs`}>
-                    {lesson.category}
-                </Badge>
-            </div>
-
-            <div className="flex items-center justify-between pt-2 border-t border-border">
-                <p className="text-sm font-bold text-foreground line-clamp-1">
-                    {lesson.description}
-                </p>
-                <Button variant="ghost" size="sm" className="h-8 gap-2 text-primary font-semibold hover:text-primary/80">
-                    View
-                    <ArrowUpRight className="h-3 w-3" />
                 </Button>
             </div>
         </div>
