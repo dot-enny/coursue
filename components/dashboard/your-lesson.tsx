@@ -1,7 +1,6 @@
 "use client"
 
-import * as React from "react"
-import { Play } from "lucide-react"
+import { ArrowUpRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
@@ -9,78 +8,146 @@ import { Badge } from "@/components/ui/badge"
 const lessons = [
     {
         id: 1,
-        courseName: "Promotional Design",
-        courseIcon: "https://sdk.bitmoji.com/render/panel/10211854-99378385-a7b3-4610-8593-68f773636cc6-d06969c3-1629-4448-9da4-76679269558c-v1.png", // Just a placeholder for now
-        totalLessons: 30,
-        completedLessons: 24,
+        date: "2/16/2004",
+        category: "FRONT END",
+        categoryColor: "bg-blue-100 text-blue-600 dark:bg-blue-900/40 dark:text-blue-400",
+        description: "SEO Optimization",
         mentor: {
-            name: "Tria Baone",
-            avatar: "/images/mentor-4.jpg",
+            name: "Jean Caros",
+            avatar: "/images/avatars/mentor-1.png",
             fallback: "TB",
         },
-        status: "in-progress",
     },
     {
         id: 2,
-        courseName: "Social Media Boost",
-        courseIcon: "https://sdk.bitmoji.com/render/panel/76973322-99378385-618d-4cb0-8113-1678583483b8-65147986-ebbf-4c75-b3e3-774e40243be4-v1.png",
-        totalLessons: 50,
-        completedLessons: 48,
+        date: "2/16/2004",
+        category: "UI/UX DESIGN",
+        categoryColor: "bg-orange-100 text-orange-600 dark:bg-orange-900/40 dark:text-orange-400",
+        description: "Understanding of UI/UX Design",
         mentor: {
             name: "Kierra Gouse",
-            avatar: "/images/mentor-2.jpg",
+            avatar: "/images/avatars/mentor-2.png",
             fallback: "KG",
         },
-        status: "in-progress",
     },
 ]
 
 export function YourLesson() {
     return (
-        <div className="rounded-3xl border border-border bg-card p-6 shadow-xs">
-            <div className="mb-6 flex items-center justify-between">
+        <div className="space-y-4">
+            <div className="flex items-center justify-between">
                 <h2 className="text-xl font-bold text-foreground">Your Lesson</h2>
                 <a href="#" className="text-sm font-semibold text-primary hover:underline">
                     See all
                 </a>
             </div>
 
-            <div className="space-y-4">
+            <div className="rounded-3xl bg-card shadow-xs">
+                <DesktopView />
+                <MobileView />
+            </div>
+        </div>
+    )
+}
+
+const DesktopView = () => {
+    return (
+        <div className="hidden md:block">
+            {/* table header */}
+            <div className="grid grid-cols-12 gap-4 px-6 py-3 border-b border-border/60 text-xs font-semibold text-muted-foreground uppercase tracking-wider text-center">
+                <div className="col-span-3">Mentor</div>
+                <div className="col-span-3">Type</div>
+                <div className="col-span-4">Desc</div>
+                <div className="col-span-1 ml-10">Action</div>
+            </div>
+            {/* table items */}
+            <div>
                 {lessons.map((lesson) => (
-                    <div
-                        key={lesson.id}
-                        className="flex items-center justify-between gap-4 rounded-2xl border border-transparent bg-background p-4 shadow-xs transition-all hover:border-border hover:shadow-md"
-                    >
-                        {/* Left: Mentor and Course Info */}
-                        <div className="flex items-center gap-4 flex-1">
-                            <div className="relative h-12 w-12 shrink-0">
-                                {/* Combined Avatar UI - simplified for now */}
-                                <Avatar className="h-12 w-12 border-2 border-background shadow-xs">
-                                    <AvatarImage src={lesson.mentor.avatar} />
-                                    <AvatarFallback>{lesson.mentor.fallback}</AvatarFallback>
-                                </Avatar>
-                                <div className="absolute -bottom-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-white ring-2 ring-background">
-                                    {/* Icon or Status */}
-                                    <Play className="h-2 w-2 fill-current" />
-                                </div>
-                            </div>
-
-                            <div className="flex flex-col">
-                                <h3 className="text-sm font-bold text-foreground">{lesson.courseName}</h3>
-                                <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                                    <span className="font-semibold text-foreground/80">{lesson.mentor.name}</span>
-                                    <span>•</span>
-                                    <span>{lesson.completedLessons} / {lesson.totalLessons} Lessons</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Right: Action */}
-                        <Button variant="outline" size="sm" className="hidden rounded-full border-border bg-transparent font-semibold shadow-xs hover:bg-muted sm:flex">
-                            View
-                        </Button>
-                    </div>
+                    <LessonItemDesktop key={lesson.id} lesson={lesson} />
                 ))}
+            </div>
+        </div>
+    )
+};
+
+const MobileView = () => {
+    return (
+        <div className="md:hidden space-y-4 px-6">
+            {lessons.map((lesson) => (
+                <LessonItemMobile key={lesson.id} lesson={lesson} />
+            ))}
+        </div>
+    )
+};
+
+const LessonItemDesktop = ({ lesson }: { lesson: typeof lessons[0] }) => {
+    return (
+        <div key={lesson.id} className="grid grid-cols-12 gap-4 items-center px-6 py-3 border-b border-border/60 last:border-0 hover:bg-muted/50 transition-colors">
+            {/* Mentor */}
+            <div className="col-span-4 flex items-center gap-3 pl-">
+                <Avatar className="h-10 w-10 border border-border">
+                    <AvatarImage src={lesson.mentor.avatar} />
+                    <AvatarFallback className="bg-orange-100 text-orange-600 font-bold text-xs">
+                        {lesson.mentor.fallback}
+                    </AvatarFallback>
+                </Avatar>
+                <div className="flex flex-col">
+                    <span className="text-sm font-bold text-foreground">{lesson.mentor.name}</span>
+                    <span className="text-xs text-muted-foreground">{lesson.date}</span>
+                </div>
+            </div>
+
+            {/* Type */}
+            <div className="col-span-3 fle">
+                <Badge variant="secondary" className={`${lesson.categoryColor} border-none font-semibold shadow-xs`}>
+                    {lesson.category}
+                </Badge>
+            </div>
+
+            {/* Desc */}
+            <div className="col-span-4 text-sm font-bold text-foreground truncate">
+                {lesson.description}
+            </div>
+
+            {/* Action */}
+            <div className="col-span-1 flex justify-center">
+                <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full border border-border hover:bg-muted text-primary">
+                    <ArrowUpRight className="h-4 w-4" />
+                </Button>
+            </div>
+        </div>
+    )
+}
+
+const LessonItemMobile = ({ lesson }: { lesson: typeof lessons[0] }) => {
+    return (
+        <div className="rounded-2xl border border-border bg-background p-4 shadow-sm flex flex-col gap-4">
+            <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                    <Avatar className="h-10 w-10 border border-border">
+                        <AvatarImage src={lesson.mentor.avatar} />
+                        <AvatarFallback className="bg-orange-100 text-orange-600 font-bold text-xs">
+                            {lesson.mentor.fallback}
+                        </AvatarFallback>
+                    </Avatar>
+                    <div className="flex flex-col">
+                        <span className="text-sm font-bold text-foreground">{lesson.mentor.name}</span>
+                        <span className="text-xs text-muted-foreground">{lesson.date}</span>
+                    </div>
+                </div>
+                <Badge variant="secondary" className={`${lesson.categoryColor} border-none font-semibold shadow-xs`}>
+                    {lesson.category}
+                </Badge>
+            </div>
+
+            <div className="flex items-center justify-between pt-2 border-t border-border">
+                <p className="text-sm font-bold text-foreground line-clamp-1">
+                    {lesson.description}
+                </p>
+                <Button variant="ghost" size="sm" className="h-8 gap-2 text-primary font-semibold hover:text-primary/80">
+                    View
+                    <ArrowUpRight className="h-3 w-3" />
+                </Button>
             </div>
         </div>
     )
