@@ -31,7 +31,7 @@ const mentors = [
 
 export function YourMentor() {
     return (
-        <div className="rounded-3xl border border-border bg-card p-6 shadow-xs">
+        <div>
             <div className="mb-4 flex items-center justify-between">
                 <h2 className="text-xl font-bold text-foreground">Your Mentor</h2>
                 <Button variant="outline" size="icon" className="h-8 w-8 rounded-full border-border bg-background hover:bg-muted">

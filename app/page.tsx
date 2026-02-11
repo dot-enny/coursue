@@ -8,7 +8,7 @@ import { YourMentor } from "@/components/dashboard/your-mentor";
 
 export default function Home() {
   return (
-    <div className="flex h-full flex-col gap-8 lg:flex-row">
+    <div className="flex h-full flex-col gap-8 xl:flex-row">
       {/* Main Content Column */}
       <div className="flex flex-1 flex-col gap-8 min-w-0">
         <HeroBanner />
@@ -18,10 +18,13 @@ export default function Home() {
       </div>
 
       {/* Right Sidebar Panel Column */}
-      <div className="flex w-full flex-col gap-6 lg:w-80 shrink-0">
+      <div className="flex w-full flex-col gap-6 xl:w-80 shrink-0">
+        {/* <div className="flex flex-col gap-8 rounded-3xl border border-border bg-card p-6 shadow-xs"> */}
         <StatisticPanel />
+        {/* Dashed Separator could be added here if needed, but spacing might be enough */}
         <ActivityChart />
         <YourMentor />
+        {/* </div> */}
       </div>
     </div>
   );

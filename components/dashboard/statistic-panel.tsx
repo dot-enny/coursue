@@ -7,7 +7,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 export function StatisticPanel() {
     return (
-        <div className="flex flex-col items-center rounded-3xl border border-border bg-card p-6 shadow-xs">
+        <div className="flex flex-col items-center">
             <div className="mb-6 flex w-full items-center justify-between">
                 <h2 className="text-xl font-bold text-foreground">Statistic</h2>
                 <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full text-muted-foreground hover:bg-muted">

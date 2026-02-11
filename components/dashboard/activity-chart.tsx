@@ -21,7 +21,7 @@ const data = [
 
 export function ActivityChart() {
     return (
-        <div className="rounded-3xl border border-border bg-card p-6 shadow-xs">
+        <div className="">
             <div className="mb-6 flex items-center justify-between">
                 <h2 className="text-xl font-bold text-foreground">Activity</h2>
                 <div className="flex gap-2">
