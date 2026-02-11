@@ -27,35 +27,42 @@ const categories = [
   },
 ];
 
+type Category = typeof categories[0];
+
 export function CourseCategories() {
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {categories.map((category) => (
-        <div
-          key={category.title}
-          className="group relative flex items-center gap-3 rounded-2xl dark:border bg-card py-3 px-3 transition-all dark:border-border/50"
-        >
-          <div
-            className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full ${category.bg} ${category.color}`}
-          >
-            <category.icon className="h-6 w-6" />
-          </div>
-          <div className="flex flex-1 flex-col tracking-tighter">
-            <span className="text-xs font-medium text-muted-foreground">
-              {category.progress}
-            </span>
-            <h3 className="font-bold text-foreground">{category.title}</h3>
-          </div>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="h-8 w-8 rounded-full text-muted-foreground hover:bg-muted"
-          >
-            <MoreVertical className="h-4 w-4" />
-            <span className="sr-only">More options</span>
-          </Button>
-        </div>
+        <CategoryItem key={category.title} category={category} />
       ))}
     </div>
   );
+}
+
+const CategoryItem = ({ category }: { category: Category }) => {
+  return (
+    <div
+      className="group relative flex items-center gap-3 rounded-2xl dark:border bg-card py-3 px-3 transition-all dark:border-border/50"
+    >
+      <div
+        className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full ${category.bg} ${category.color}`}
+      >
+        <category.icon className="h-6 w-6" />
+      </div>
+      <div className="flex flex-1 flex-col tracking-tighter">
+        <span className="text-xs font-medium text-muted-foreground">
+          {category.progress}
+        </span>
+        <h3 className="font-bold text-foreground">{category.title}</h3>
+      </div>
+      <Button
+        variant="ghost"
+        size="icon"
+        className="h-8 w-8 rounded-full text-muted-foreground hover:bg-muted"
+      >
+        <MoreVertical className="h-4 w-4" />
+        <span className="sr-only">More options</span>
+      </Button>
+    </div>
+  )
 }
