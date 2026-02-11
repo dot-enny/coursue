@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export function HeroBanner() {
@@ -16,7 +16,7 @@ export function HeroBanner() {
         </h1>
         <Button
           size="lg"
-          className="group h-11 rounded-full bg-[#1E293B] pl-6 pr-2 flex justify-between text-sm font-semibold text-white hover:bg-[#0f172a] hover:scale-105 transition-all duration-300 cursor-pointer"
+          className="group h-11 rounded-full bg-[#1E293B] pl-6 pr-2 flex justify-between text-sm font-semibold text-white hover:bg-[#0f172a] transition-colors duration-300 ease-out cursor-pointer"
         >
           Join Now
           <div className="ml-1 flex size-8 items-center justify-center rounded-full bg-white">

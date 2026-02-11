@@ -53,7 +53,7 @@ const courses = [
 
 export function ContinueWatching() {
     return (
-        <div className="space-y-4">
+        <div className="space-y-4 shadow-xs">
             <div className="flex items-center justify-between">
                 <h2 className="text-xl font-bold text-foreground tracking-tighter">Continue Watching</h2>
                 <div className="flex gap-2">
