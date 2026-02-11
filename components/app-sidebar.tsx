@@ -98,15 +98,15 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       className="border-r-transparent bg-sidebar w-56"
       {...props}
     >
-      <SidebarHeader className="py-6 px-6">
-        <div className="flex items-center gap-2 font-bold text-xl text-foreground">
-          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground">
+      <SidebarHeader className="py-6 px-6 group-data-[collapsible=icon]:p-2 group-data-[collapsible=icon]:justify-center">
+        <div className="flex items-center gap-2 font-bold text-xl text-foreground group-data-[collapsible=icon]:justify-center">
+          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
             <Sparkles className="h-4 w-4 fill-current" />
           </div>
-          Coursue
+          <span className="group-data-[collapsible=icon]:hidden">Coursue</span>
         </div>
       </SidebarHeader>
-      <SidebarContent className="px-4">
+      <SidebarContent className="px-4 group-data-[collapsible=icon]:px-0">
         {sidebarSections.map((section, idx) => {
           const groupClassName =
             section.key === "settings"
@@ -115,9 +115,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 ? "mt-4"
                 : undefined;
 
+          const visibilityClass = section.variant === "friends" ? "group-data-[collapsible=icon]:hidden" : "";
+
           return (
-            <SidebarGroup key={section.key} className={groupClassName}>
-              <SidebarGroupLabel className="uppercase text-[10px] font-bold text-muted-foreground/70 mb-1 px-2 tracking-wider">
+            <SidebarGroup key={section.key} className={`${groupClassName} ${visibilityClass}`}>
+              <SidebarGroupLabel className="uppercase text-[10px] font-bold text-muted-foreground/70 mb-1 px-2 tracking-wider group-data-[collapsible=icon]:hidden">
                 {section.label}
               </SidebarGroupLabel>
               <SidebarGroupContent>
@@ -167,6 +169,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                           <SidebarMenuButton
                             {...(item.isActive ? { isActive: true } : {})}
                             className={btnClass}
+                            tooltip={{
+                              children: item.label,
+                              hidden: false,
+                            }}
                           >
                             {Icon ? <Icon /> : null}
                             <span>{item.label}</span>
@@ -181,7 +187,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         })}
       </SidebarContent>
 
-      <div className="hidden max-sm:hidden md:flex justify-end px-4 pb-4 lg:hidden">
+      <div className="hidden max-sm:hidden md:flex justify-end px-4 pb-4 lg:hidden group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:px-0">
         <SidebarTrigger className="text-muted-foreground hover:text-foreground" />
       </div>
     </Sidebar>
