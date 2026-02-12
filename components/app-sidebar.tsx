@@ -95,7 +95,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar
       collapsible="icon"
-      className="border-r-transparent bg-sidebar w-56"
+      className="border-r-transparent bg-sidebar"
       {...props}
     >
       <SidebarHeader className="py-6 px-6 group-data-[collapsible=icon]:p-2 group-data-[collapsible=icon]:justify-center">

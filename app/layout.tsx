@@ -21,6 +21,8 @@ export const metadata: Metadata = {
   description: "Sharpen Your Skills with Professional Online Courses",
 };
 
+const SIDEBAR_WIDTH = "14rem"
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -37,7 +39,12 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <SidebarProvider>
+          <SidebarProvider
+            style={
+              {
+                "--sidebar-width": SIDEBAR_WIDTH,
+              } as React.CSSProperties
+            }>
             <div className="flex min-h-screen w-full">
               <AppSidebar />
               <main className="flex w-full flex-col overflow-x-hidden bg-background">
